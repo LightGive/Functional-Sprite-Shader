@@ -1,4 +1,4 @@
-﻿Shader "Sprites/LightGive/Custom"
+﻿Shader "Sprites/LowRes"
 {
     Properties
     {
@@ -6,7 +6,6 @@
         _Color ("Tint", Color) = (1,1,1,1)
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         _Grid ("Width", Range(1, 128)) = 16
-        _WhiteColor ("Pixel snap", Float) = 0
     }
  
     SubShader
@@ -72,10 +71,10 @@
             fixed4 SampleSpriteTexture (float2 uv)
             {
                 fixed4 color = tex2D (_MainTex, uv);
-                color.a = _SinTime.w;
+ 
 #if UNITY_TEXTURE_ALPHASPLIT_ALLOWED
                 if (_AlphaSplitEnabled)
-                    color.r = tex2D (_AlphaTex, uv).r;
+                    color.a = tex2D (_AlphaTex, uv).r;
 #endif //UNITY_TEXTURE_ALPHASPLIT_ALLOWED
  
                 return color;
