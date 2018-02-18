@@ -1,4 +1,4 @@
-# Functional-Sprite-Shader
+# Functional-Sprite-Shader [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 
 ## Function
 ・ Move along the grid <br>
@@ -14,4 +14,4 @@ Sample <br>
 
 ## License
 
-MIT
+See [LICENSE](/LICENSE).
