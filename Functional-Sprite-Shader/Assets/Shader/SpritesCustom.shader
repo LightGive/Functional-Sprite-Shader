@@ -3,10 +3,11 @@
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-        _Color ("Tint", Color) = (1,1,1,1)
+        [PerRendererData]_Color ("Tint", Color) = (1,1,1,1)
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
+        [Toggle(PIXEL_PERFECT)] _PixelPerfect ("PixelPerfect", Float) = 0
         _Grid ("Width", Range(1, 128)) = 16
-        _WhiteColor ("Pixel snap", Float) = 0
+        _WhiteColor ("WhiteColor", Range(0.0 , 1.0)) = 0
     }
  
     SubShader
@@ -30,7 +31,7 @@
         CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile _ PIXELSNAP_ON
+            #pragma multi_compile _ PIXELSNAP_ON PIXEL_PERFECT
             #include "UnityCG.cginc"
             
             struct appdata_t
@@ -53,9 +54,19 @@
             v2f vert(appdata_t IN)
             {
                 v2f OUT;
+
+                #ifdef PIXEL_PERFECT
+
+                //PixelPerfectにチェックがある時
                 OUT.vertex = mul(UNITY_MATRIX_M, IN.vertex);
                 OUT.vertex = floor(OUT.vertex * _Grid) / _Grid;
                 OUT.vertex = mul(UNITY_MATRIX_VP, OUT.vertex);
+                #else
+
+                //PixelPerfectにチェックがない時
+                OUT.vertex = UnityObjectToClipPos(IN.vertex);
+                #endif
+
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color;
                 #ifdef PIXELSNAP_ON
@@ -68,23 +79,14 @@
             sampler2D _MainTex;
             sampler2D _AlphaTex;
             float _AlphaSplitEnabled;
- 
-            fixed4 SampleSpriteTexture (float2 uv)
-            {
-                fixed4 color = tex2D (_MainTex, uv);
-                color.a = _SinTime.w;
-#if UNITY_TEXTURE_ALPHASPLIT_ALLOWED
-                if (_AlphaSplitEnabled)
-                    color.r = tex2D (_AlphaTex, uv).r;
-#endif //UNITY_TEXTURE_ALPHASPLIT_ALLOWED
- 
-                return color;
-            }
+            float _WhiteColor;
  
             fixed4 frag(v2f IN) : SV_Target
             {
-                fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
+                fixed4 c = tex2D (_MainTex, IN.texcoord);
+                c.rgb = saturate((IN.color.rgb * c.rgb) +_WhiteColor );
                 c.rgb *= c.a;
+
                 return c;
             }
         ENDCG
