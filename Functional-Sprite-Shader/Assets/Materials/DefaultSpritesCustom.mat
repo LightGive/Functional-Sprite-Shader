@@ -24,7 +24,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _Grid: 64
+    - _Grid: 17
     - _PixelPerfect: 1
     - _TurnSpeed: 0
     - _WhiteColor: 0
