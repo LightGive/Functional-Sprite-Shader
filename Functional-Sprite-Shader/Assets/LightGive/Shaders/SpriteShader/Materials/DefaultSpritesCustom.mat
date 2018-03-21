@@ -24,10 +24,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _Alpha: 0.569
-    - _Grid: 64
+    - _Alpha: 0
+    - _Grid: 32
     - _PixelPerfect: 1
     - _TurnSpeed: 0
-    - _WhiteColor: 0.441
+    - _WhiteColor: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

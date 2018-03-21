@@ -5,7 +5,7 @@
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         [Toggle(PIXEL_PERFECT)] _PixelPerfect ("PixelPerfect", Float) = 0
-        _Grid ("Width", Range(1, 128)) = 16
+        _Grid ("Width", Range(1, 256)) = 16
         _WhiteColor ("WhiteColor", Range(0.0 , 1.0)) = 0
         _Alpha("Alpha" , Range(0.0 , 1.0)) = 1
     }
@@ -83,22 +83,10 @@
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                //fixed4 c = tex2D (_MainTex, IN.texcoord);
-                //c.rgb = saturate((IN.color.rgb * c.rgb) +_WhiteColor );
-                //c.rgb *= c.a;
-
                 fixed4 c = tex2D(_MainTex,IN.texcoord);
-                c.rgb = saturate((IN.color.rgb * c.rgb) );
-                //c.a = IN.color.a * c.rgb;
-                //c.rgb *= c.a;
-
-
-
-                //c.a = IN.color.a;
-
-                //c.rgb = saturate((IN.color.rgb * c.rgb)+_WhiteColor);
-                //c.a = _Alpha;
-                //c.a = IN.color.a + _Alpha;
+                c.rgb = saturate((IN.color.rgb * c.rgb) + _WhiteColor);
+                c.a = IN.color.a * c.a;
+                c.rgb *= c.a;
                 return c;
             }
         ENDCG
