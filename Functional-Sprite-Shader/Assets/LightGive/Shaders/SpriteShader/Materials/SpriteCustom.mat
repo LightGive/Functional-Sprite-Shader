@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DefaultSpritesCustom
+  m_Name: SpriteCustom
   m_Shader: {fileID: 4800000, guid: fdc46d35fb19b46cf97e9d36d847c0e6, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA OUT_LINE PIXEL_PERFECT
   m_LightmapFlags: 4
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -25,9 +29,20 @@ Material:
     m_Floats:
     - PixelSnap: 0
     - _Alpha: 0
+    - _EnableExternalAlpha: 0
     - _Grid: 32
+    - _OutLineSpread: 0.002
+    - _OutLineSpreadX: 0
+    - _OutLineSpreadY: 0
+    - _Outline: 0
+    - _OutlineSize: 1
+    - _OutlineType: 1
     - _PixelPerfect: 1
+    - _Smoothness: 0
     - _TurnSpeed: 0
     - _WhiteColor: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

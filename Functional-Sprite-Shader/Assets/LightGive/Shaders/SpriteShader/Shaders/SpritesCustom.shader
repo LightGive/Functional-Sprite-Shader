@@ -3,11 +3,12 @@
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        //[Enum(None, 0, Outline 4, 1, Outline 8, 2)] _OutlineType("OutlineType", Int) = 0
+        //_OutlineColor ("OutlineColor", Color) = (1,1,1,1)
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         [Toggle(PIXEL_PERFECT)] _PixelPerfect ("PixelPerfect", Float) = 0
         _Grid ("Width", Range(1, 256)) = 16
         _WhiteColor ("WhiteColor", Range(0.0 , 1.0)) = 0
-        _Alpha("Alpha" , Range(0.0 , 1.0)) = 1
     }
  
     SubShader
@@ -79,7 +80,6 @@
             sampler2D _MainTex;
             sampler2D _AlphaTex;
             float _WhiteColor;
-            float _Alpha;
 
             fixed4 frag(v2f IN) : SV_Target
             {
